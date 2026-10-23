@@ -42,40 +42,46 @@ async function loadProduct() {
     const p = currentProduct;
     document.title = `${p.name} - Joy World Farm`;
 
-    const metaRows = [];
-    if (p.breed) metaRows.push(`<tr><th>Breed</th><td>${p.breed}</td></tr>`);
-    if (p.age) metaRows.push(`<tr><th>Age</th><td>${p.age}</td></tr>`);
-    if (p.size) metaRows.push(`<tr><th>Size</th><td>${p.size}</td></tr>`);
-    if (p.quantity_unit) metaRows.push(`<tr><th>Quantity Unit</th><td>${p.quantity_unit}</td></tr>`);
-    metaRows.push(`<tr><th>Availability</th><td>${p.available_quantity > 0 ? `${p.available_quantity} available` : 'Out of stock'}</td></tr>`);
-    metaRows.push(`<tr><th>Minimum Order</th><td>${p.min_order_quantity}</td></tr>`);
+    const priceNum = Number(p.price);
+    const priceUnconfirmed = p.is_demo || priceNum === 0 || priceNum === null || priceNum === undefined;
+    const priceDisplay = priceUnconfirmed ? 'Request current price' : `₦${priceNum.toLocaleString()}`;
 
-    const inStock = p.available_quantity > 0;
+    const metaRows = [];
+    if (p.breed) metaRows.push(`<tr><th>Breed</th><td>${escapeHtml ? escapeHtml(p.breed) : p.breed}</td></tr>`);
+    if (p.age) metaRows.push(`<tr><th>Age / Growth Stage</th><td>${escapeHtml ? escapeHtml(p.age) : p.age}</td></tr>`);
+    if (p.size) metaRows.push(`<tr><th>Size</th><td>${escapeHtml ? escapeHtml(p.size) : p.size}</td></tr>`);
+    if (p.quantity_unit) metaRows.push(`<tr><th>Quantity Unit</th><td>${escapeHtml ? escapeHtml(p.quantity_unit) : p.quantity_unit}</td></tr>`);
+    metaRows.push(`<tr><th>Availability</th><td>${p.available_quantity > 0 ? `${p.available_quantity} available` : (p.available_quantity === 0 ? 'Out of stock' : 'Contact us for availability')}</td></tr>`);
+    metaRows.push(`<tr><th>Minimum Order</th><td>${p.min_order_quantity || 1}</td></tr>`);
+
+    const inStock = p.available_quantity > 0 && !priceUnconfirmed;
 
     container.innerHTML = `
       <nav aria-label="Breadcrumb" class="breadcrumb">
-        <a href="/">Home</a> / <a href="/${p.category}">${p.category}</a> / <span>${p.name}</span>
+        <a href="/">Home</a> / <a href="/${p.category}">${p.category}</a> / <span>${escapeHtml ? escapeHtml(p.name) : p.name}</span>
       </nav>
-      ${p.is_demo ? '<div class="alert alert-info">This is a demonstration listing. Prices and stock quantities are unconfirmed and will be updated by the farm owner.</div>' : ''}
+      ${p.is_demo ? '<div class="alert alert-info">This is a demonstration listing. Prices and stock quantities are unconfirmed. Contact us for current prices and availability.</div>' : ''}
+      ${priceUnconfirmed && !p.is_demo ? '<div class="alert alert-info">Price not confirmed. Please contact us for current price and availability.</div>' : ''}
       <div class="product-detail">
         <div class="product-detail-image">
-          <img src="${p.image_url || '/images/placeholder.svg'}" alt="${p.name}" onerror="this.parentElement.classList.add('fallback'); this.parentElement.textContent='🐓';">
+          <img src="${p.image_url || '/images/placeholder.svg'}" alt="${escapeHtml ? escapeHtml(p.name) : p.name}" onerror="this.parentElement.classList.add('fallback'); this.parentElement.textContent='';">
         </div>
         <div class="product-detail-info">
-          <h1>${p.name}</h1>
-          <div class="product-detail-price">₦${p.price.toLocaleString()}</div>
-          <p class="product-detail-desc">${p.description || ''}</p>
+          <h1>${escapeHtml ? escapeHtml(p.name) : p.name}</h1>
+            <div class="product-detail-price" data-unconfirmed="${priceUnconfirmed ? 'true' : 'false'}" style="${priceUnconfirmed ? 'color:#d97706;font-size:1.2rem;font-weight:600;' : ''}">${priceDisplay}</div>
+          <p class="product-detail-desc">${escapeHtml ? escapeHtml(p.description || '') : (p.description || '')}</p>
           <table class="product-meta-table">${metaRows.join('')}</table>
           <div class="product-actions">
             <div class="qty-selector">
               <label for="qtyInput">Quantity:</label>
-              <button type="button" class="qty-btn" onclick="changeQty(-1)" aria-label="Decrease quantity">−</button>
-              <input type="number" id="qtyInput" value="${p.min_order_quantity}" min="${p.min_order_quantity}" max="${p.available_quantity}" ${!inStock ? 'disabled' : ''} aria-label="Quantity">
+              <button type="button" class="qty-btn" onclick="changeQty(-1)" aria-label="Decrease quantity">-</button>
+              <input type="number" id="qtyInput" value="${p.min_order_quantity || 1}" min="${p.min_order_quantity || 1}" max="${p.available_quantity || 999999}" ${!p.available_quantity ? 'disabled' : ''} aria-label="Quantity">
               <button type="button" class="qty-btn" onclick="changeQty(1)" aria-label="Increase quantity">+</button>
             </div>
-            <button class="btn btn-primary btn-full" id="addToCartBtn" ${!inStock ? 'disabled' : ''} onclick="addToCartHandler()">Add to Cart</button>
-            <button class="btn btn-whatsapp btn-full" id="waOrderBtn" ${!inStock ? 'disabled' : ''} onclick="whatsappOrderHandler()">Order on WhatsApp</button>
+            <button class="btn btn-primary btn-full" id="addToCartBtn" ${priceUnconfirmed ? 'disabled title="Price not confirmed - request current price"' : (!inStock ? 'disabled' : '')} onclick="${priceUnconfirmed ? 'whatsappOrderHandler()' : 'addToCartHandler()'}">${priceUnconfirmed ? 'Request Current Price via WhatsApp' : (inStock ? 'Add to Cart' : 'Out of Stock')}</button>
+            <button class="btn btn-whatsapp btn-full" id="waOrderBtn" onclick="whatsappOrderHandler()">Order on WhatsApp</button>
           </div>
+          <p class="checkout-note" style="margin-top:10px;">Orders are confirmed by our team. Payment is arranged directly after order confirmation.</p>
         </div>
       </div>`;
 

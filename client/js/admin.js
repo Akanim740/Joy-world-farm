@@ -51,7 +51,13 @@ async function loadDashboard() {
     { label: 'Completed', value: s.completedOrders },
     { label: 'Cancelled', value: s.cancelledOrders },
     { label: 'Active Products', value: s.totalProducts },
-    { label: 'Wholesale Enquiries', value: s.totalEnquiries }
+    { label: 'Wholesale Enquiries', value: s.totalEnquiries },
+    { label: 'Delivery Orders', value: s.deliveryOrders },
+    { label: 'Awaiting Delivery Confirmation', value: s.awaitingDeliveryConfirmation },
+    { label: 'Out for Delivery', value: s.outForDelivery },
+    { label: 'Low Stock (<=10)', value: s.lowStock },
+    { label: 'Out of Stock', value: s.outOfStock },
+    { label: 'New Enquiries', value: s.newEnquiries }
   ];
   document.getElementById('statsGrid').innerHTML = cards.map(c => `
     <div class="stat-card">
@@ -132,6 +138,10 @@ function editProduct(p) {
   document.getElementById('pMinOrder').value = p.min_order_quantity;
   document.getElementById('pDescription').value = p.description || '';
   document.getElementById('pActive').checked = !!p.is_active;
+  document.getElementById('pUnitOfSale').value = p.unit_of_sale || '';
+  document.getElementById('pVariants').value = p.variants || '';
+  document.getElementById('pDeliveryEligible').checked = p.delivery_eligible !== 0;
+  document.getElementById('pFeatured').checked = p.featured == 1;
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
@@ -140,6 +150,8 @@ function resetProductForm() {
   document.getElementById('productForm').reset();
   document.getElementById('productId').value = '';
   document.getElementById('pActive').checked = true;
+  document.getElementById('pDeliveryEligible').checked = true;
+  document.getElementById('pFeatured').checked = false;
 }
 
 async function saveProduct(e) {
@@ -164,6 +176,10 @@ async function saveProduct(e) {
   formData.append('minOrderQuantity', document.getElementById('pMinOrder').value);
   formData.append('description', document.getElementById('pDescription').value.trim());
   formData.append('isActive', document.getElementById('pActive').checked);
+  formData.append('deliveryEligible', document.getElementById('pDeliveryEligible').checked);
+  formData.append('featured', document.getElementById('pFeatured').checked);
+  formData.append('unitOfSale', document.getElementById('pUnitOfSale').value.trim());
+  formData.append('variants', document.getElementById('pVariants').value.trim());
   const file = document.getElementById('pImage').files[0];
   if (file) formData.append('image', file);
 

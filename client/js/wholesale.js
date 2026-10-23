@@ -2,10 +2,17 @@ document.addEventListener('DOMContentLoaded', () => {
   fetch('/api/config')
     .then(r => r.json())
     .then(data => {
-      const num = data.whatsappNumber || '';
+      const num = data.whatsappNumber || data.businessPhone || data.phone || '';
       const waBtn = document.getElementById('waEnquiryBtn');
+      const hoursEl = document.getElementById('wholesaleHours');
+      if (hoursEl) hoursEl.textContent = data.businessHours || 'Business hours to be announced';
       if (num && waBtn) {
-        waBtn.href = getWhatsappUrl(num, 'Hello Joy World Farm, I would like to enquire about wholesale prices for bulk poultry or catfish supply.');
+        const msg = 'Hello Joy World Farm, I would like to enquire about wholesale prices for bulk poultry or catfish supply.';
+        if (typeof getWhatsappUrl === 'function') {
+          waBtn.href = getWhatsappUrl(num, msg);
+        } else {
+          waBtn.href = `https://wa.me/${String(num).replace(/[^0-9]/g,'')}?text=${encodeURIComponent(msg)}`;
+        }
         waBtn.removeAttribute('hidden');
       }
     })

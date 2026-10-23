@@ -2,8 +2,11 @@
 const router = express.Router();
 const { validateWholesale, handleValidationErrors } = require('../middleware/validation');
 const db = require('../config/database');
+const { createRateLimiter } = require('../middleware/rateLimit');
 
-router.post('/', validateWholesale, handleValidationErrors, (req, res) => {
+const enquiryLimiter = createRateLimiter({ windowMs: 10 * 60 * 1000, max: 10, message: 'Too many enquiries submitted. Please try again later.' });
+
+router.post('/', enquiryLimiter, validateWholesale, handleValidationErrors, (req, res) => {
   try {
     const { customerName, customerPhone, businessName, productsRequired, estimatedQuantity, notes } = req.body;
     db.prepare(`

@@ -78,9 +78,9 @@ async function loadConfirmation() {
 
         <div class="confirm-actions">
           ${waBtn}
+          <a href="/order-tracking.html" class="btn btn-primary btn-full" style="margin-top:10px;" id="trackOrderBtn">Track Your Order</a>
           <a href="/" class="btn btn-outline btn-full" style="margin-top:10px;">Continue Shopping</a>
-        </div>
-      </div>`;
+        </div>`;
   } catch (err) {
     container.innerHTML = `
       <div class="empty-state">

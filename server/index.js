@@ -47,6 +47,7 @@ app.use('/api/config', require('./routes/config'));
 app.use('/api/products', require('./routes/products'));
 app.use('/api/orders', require('./routes/orders'));
 app.use('/api/wholesale', require('./routes/wholesale'));
+app.use('/api/delivery', require('./routes/delivery'));
 app.use('/api/admin', require('./routes/admin'));
 app.use('/api/admin', require('./routes/adminApi'));
 app.use('/api/auth', require('./routes/auth'));
@@ -74,6 +75,7 @@ app.get('/admin/dashboard', serveIfAdmin('admin-dashboard.html'));
 app.get('/admin/products', serveIfAdmin('admin-products.html'));
 app.get('/admin/orders', serveIfAdmin('admin-orders.html'));
 app.get('/admin/enquiries', serveIfAdmin('admin-enquiries.html'));
+app.get('/admin/delivery', serveIfAdmin('admin-delivery.html'));
 
 /* ---------- Static pages (clean URLs) ---------- */
 const pages = {
@@ -84,6 +86,11 @@ const pages = {
   '/cart': 'cart.html',
   '/checkout': 'checkout.html',
   '/order-confirmation': 'order-confirmation.html',
+  '/order-tracking': 'order-tracking.html',
+  '/delivery-info': 'delivery-info.html',
+  '/privacy': 'privacy.html',
+  '/terms': 'terms.html',
+  '/returns': 'returns.html',
   '/chicks': 'chicks.html',
   '/turkeys': 'turkeys.html',
   '/catfish': 'catfish.html',
@@ -104,7 +111,7 @@ function escapeXml(value) {
 
 app.get('/sitemap.xml', (req, res) => {
   const base = config.siteUrl.replace(/\/$/, '');
-  const staticPages = ['/', '/chicks', '/turkeys', '/catfish', '/about', '/contact', '/wholesale'];
+  const staticPages = ['/', '/chicks', '/turkeys', '/catfish', '/about', '/contact', '/wholesale', '/delivery-info', '/privacy', '/terms', '/returns'];
 
   let products = [];
   try {

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/svg+xml" href="/images/favicon.svg">
+  <title>Delivery Information - Joy World Farm</title>
+  <meta name="description" content="Delivery areas, fees, timeframes and live animal handling information for orders from Joy World Farm in Port Harcourt, Rivers State.">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/static.css">
+  <link rel="stylesheet" href="/css/animations.css">
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <header>
+    <nav class="nav" aria-label="Main navigation">
+      <a class="logo" href="/"><span>Joy World Farm</span></a>
+      <button class="mobile-menu" id="mobileMenuBtn" aria-label="Toggle menu" aria-expanded="false">Menu</button>
+      <div class="nav-links" id="navLinks">
+        <a class="nav-link" href="/">Home</a>
+        <a class="nav-link" href="/chicks">Chicks</a>
+        <a class="nav-link" href="/turkeys">Turkeys</a>
+        <a class="nav-link" href="/catfish">Catfish</a>
+        <a class="nav-link" href="/wholesale">Wholesale</a>
+        <a class="nav-link" href="/about">About</a>
+        <a class="nav-link" href="/contact">Contact</a>
+        <a class="nav-link" href="/cart">Cart <span class="cart-badge" id="cartBadge">0</span></a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main-content">
+    <section class="page-hero-simple">
+      <div class="container"><h1>Delivery Information</h1></div>
+    </section>
+
+    <section class="static-content">
+      <div class="container narrow">
+        <div class="content-block">
+          <h2>Where We Deliver</h2>
+          <p>We currently arrange delivery within Port Harcourt and surrounding areas of Rivers State. Delivery availability and fees depend on your exact location. The zones shown at checkout are estimates and are confirmed by our team before payment.</p>
+        </div>
+        <div class="content-block">
+          <h2>Delivery Fees</h2>
+          <p>Delivery fees are calculated by zone and displayed at checkout before you place your order. If your area is not listed, please contact us on WhatsApp or by phone so we can confirm whether delivery is possible and what it will cost.</p>
+          <div id="deliveryZonesList" class="delivery-zones-list"></div>
+        </div>
+        <div class="content-block">
+          <h2>Timeframes</h2>
+          <p>We aim to confirm every order as quickly as possible. Delivery timing depends on product availability, preparation requirements, weather, and your location. Live animals are only dispatched when it is safe to transport them. We will agree a delivery date and time window with you when we confirm your order.</p>
+        </div>
+        <div class="content-block">
+          <h2>Live Animal Handling</h2>
+          <p>Chicks, poults, and grow-out birds are transported in ventilated crates. We ask that someone is available to receive the animals promptly, especially in hot weather. If you cannot receive a delivery, please tell us as early as possible so we can reschedule.</p>
+        </div>
+        <div class="content-block">
+          <h2>Collection From The Farm</h2>
+          <p>You may choose collection from the farm instead of delivery. Collection has no delivery fee. We will confirm the collection address, date, and time with you after your order is placed.</p>
+          <p><a href="/contact" class="btn btn-primary">Contact Us</a></p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>Joy World Farm</h3>
+        <p>Quality chicks, turkeys, and catfish in Port Harcourt, Rivers State, Nigeria.</p>
+      </div>
+      <div class="footer-section">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/chicks">Chicks</a></li>
+          <li><a href="/turkeys">Turkeys</a></li>
+          <li><a href="/catfish">Catfish</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h3>Company</h3>
+        <ul>
+          <li><a href="/about">About Us</a></li>
+          <li><a href="/contact">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; <span id="year"></span> Joy World Farm. Port Harcourt, Rivers State, Nigeria.</p>
+    </div>
+  </footer>
+
+  <script src="/js/utils.js"></script>
+  <script src="/js/site.js"></script>
+  <script>
+    fetch('/api/delivery/zones').then(r => r.json()).then(data => {
+      const el = document.getElementById('deliveryZonesList');
+      if (!el) return;
+      const zones = data.zones || [];
+      if (!zones.length) return;
+      el.innerHTML = '<ul>' + zones.map(z => '<li><strong>' + z.zone_name + '</strong> - N' + Number(z.delivery_fee).toLocaleString() + (z.estimated_timeframe ? ' (' + z.estimated_timeframe + ')' : '') + '</li>').join('') + '</ul><p><small>Fees are estimates and may be adjusted after confirmation.</small></p>';
+    }).catch(() => {});
+  </script>
+</body>
+</html>

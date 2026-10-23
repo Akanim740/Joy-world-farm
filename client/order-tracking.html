@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Order Tracking - Joy World Farm</title>
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/confirmation.css">
+</head>
+<body>
+  <header>
+    <nav class="nav" aria-label="Main navigation">
+      <a class="logo" href="/"><span>Joy World Farm</span></a>
+      <div class="nav-links" id="navLinks">
+        <a class="nav-link" href="/">Home</a>
+        <a class="nav-link" href="/chicks">Chicks</a>
+        <a class="nav-link" href="/turkeys">Turkeys</a>
+        <a class="nav-link" href="/catfish">Catfish</a>
+        <a class="nav-link" href="/contact">Contact</a>
+      </div>
+    </nav>
+  </header>
+  <main class="container" style="padding:40px 20px;max-width:800px;">
+    <h1>Track Your Order</h1>
+    <div id="trackingContent">
+      <div class="form-group" style="margin-top:20px;">
+        <label for="trackingToken">Tracking Token</label>
+        <input type="text" id="trackingToken" class="form-control" placeholder="Enter your tracking token">
+      </div>
+      <button class="btn btn-primary" id="trackBtn" style="margin-top:10px;">Track Order</button>
+    </div>
+  </main>
+  <script src="/js/order-tracking.js"></script>
+</body>
+</html>

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Delivery Management - Joy World Farm Admin</title>
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/admin.css">
+</head>
+<body>
+  <header class="admin-header">
+    <div class="container" style="display:flex;align-items:center;justify-content:space-between;">
+      <div style="display:flex;align-items:center;gap:20px;">
+        <h1 style="font-size:1.5rem;">Joy World Farm - Delivery Management</h1>
+        <nav class="admin-nav">
+          <a href="/admin/dashboard">Dashboard</a>
+          <a href="/admin/products">Products</a>
+          <a href="/admin/orders">Orders</a>
+          <a href="/admin/delivery" class="active">Delivery</a>
+          <a href="/admin/enquiries">Enquiries</a>
+          <a href="/">View Site</a>
+        </nav>
+      </div>
+      <button class="btn btn-danger" id="logoutBtn">Logout</button>
+    </div>
+  </header>
+
+  <main class="container" style="padding:30px 20px;">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:30px;">
+      <h2>Delivery Zones</h2>
+      <button class="btn btn-primary" id="addZoneBtn">Add Delivery Zone</button>
+    </div>
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead>
+          <tr><th>Zone</th><th>Area</th><th>Fee (₦)</th><th>Timeframe</th><th>Min Order</th><th>Status</th><th>Actions</th></tr>
+        </thead>
+        <tbody id="zonesTable"></tbody>
+      </table>
+    </div>
+
+    <h2 style="margin:40px 0 20px;">Orders Requiring Delivery</h2>
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead>
+          <tr><th>Order</th><th>Customer</th><th>Phone</th><th>Method</th><th>Zone</th><th>Delivery Fee</th><th>Status</th><th>Delivery Status</th><th>Actions</th></tr>
+        </thead>
+        <tbody id="deliveryOrdersTable"></tbody>
+      </table>
+    </div>
+  </main>
+
+  <div id="zoneModal" class="modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);align-items:center;justify-content:center;">
+    <div class="modal-content" style="background:white;padding:30px;border-radius:8px;max-width:500px;width:90%;max-height:90vh;overflow-y:auto;">
+      <h3 id="zoneModalTitle">Add Delivery Zone</h3>
+      <form id="zoneForm" style="display:flex;flex-direction:column;gap:15px;margin-top:20px;">
+        <input type="hidden" id="zoneId">
+        <div><label>Zone Name *</label><input type="text" id="zoneName" class="form-control" required></div>
+        <div><label>City/Area *</label><input type="text" id="zoneArea" class="form-control" required></div>
+        <div><label>Description</label><input type="text" id="zoneDesc" class="form-control"></div>
+        <div><label>Delivery Fee (₦) *</label><input type="number" id="zoneFee" class="form-control" required></div>
+        <div><label>Estimated Timeframe</label><input type="text" id="zoneTime" class="form-control" placeholder="e.g. Same day - Next day"></div>
+        <div><label>Minimum Order Amount (₦)</label><input type="number" id="zoneMin" class="form-control"></div>
+        <div><label>Special Notes</label><textarea id="zoneNotes" class="form-control"></textarea></div>
+        <label style="display:flex;align-items:center;gap:8px;"><input type="checkbox" id="zoneActive" checked> Active</label>
+        <div style="display:flex;gap:10px;">
+          <button type="submit" class="btn btn-primary">Save</button>
+          <button type="button" class="btn btn-outline" id="cancelZone">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div id="deliveryModal" class="modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);align-items:center;justify-content:center;">
+    <div class="modal-content" style="background:white;padding:30px;border-radius:8px;max-width:500px;width:90%;max-height:90vh;overflow-y:auto;">
+      <h3>Update Delivery</h3>
+      <form id="deliveryForm" style="display:flex;flex-direction:column;gap:15px;margin-top:20px;">
+        <input type="hidden" id="deliveryOrderId">
+        <div><label>Delivery Status</label>
+          <select id="deliveryStatus" class="form-control">
+            <option value="Awaiting confirmation">Awaiting confirmation</option>
+            <option value="Order confirmed">Order confirmed</option>
+            <option value="Preparing order">Preparing order</option>
+            <option value="Ready for dispatch">Ready for dispatch</option>
+            <option value="Out for delivery">Out for delivery</option>
+            <option value="Delivered">Delivered</option>
+            <option value="Delivery delayed">Delivery delayed</option>
+            <option value="Delivery failed">Delivery failed</option>
+            <option value="Collection ready">Collection ready</option>
+            <option value="Collected">Collected</option>
+            <option value="Cancelled">Cancelled</option>
+          </select>
+        </div>
+        <div><label>Delivery Date</label><input type="date" id="deliveryDate" class="form-control"></div>
+        <div><label>Time Window</label><input type="text" id="deliveryTimeWindow" class="form-control" placeholder="e.g. 10:00 AM - 2:00 PM"></div>
+        <div><label>Delivery Person Name</label><input type="text" id="deliveryPerson" class="form-control"></div>
+        <div><label>Delivery Person Phone</label><input type="text" id="deliveryPersonPhone" class="form-control"></div>
+        <div><label>Note / Update Message</label><textarea id="deliveryNote" class="form-control"></textarea></div>
+        <div style="display:flex;gap:10px;">
+          <button type="submit" class="btn btn-primary">Update</button>
+          <button type="button" class="btn btn-outline" id="cancelDelivery">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="/js/admin-delivery.js"></script>
+</body>
+</html>

@@ -2,11 +2,23 @@
 
 const validateOrder = [
   body('customerName').trim().notEmpty().withMessage('Customer name is required').escape(),
-  body('customerPhone').trim().notEmpty().withMessage('Phone number is required'),
-  body('city').trim().notEmpty().withMessage('City is required').escape(),
-  body('deliveryAddress').optional().trim().escape(),
-  body('collectionPreference').optional().trim().escape(),
-  body('customerNotes').optional().trim().escape(),
+  body('customerPhone').trim().notEmpty().withMessage('Phone number is required').matches(/^[0-9+\-\s()]{7,30}$/).withMessage('Invalid phone number'),
+  body('customerEmail').optional({ checkFalsy: true }).isEmail().withMessage('Invalid email').normalizeEmail(),
+  body('city').optional({ checkFalsy: true }).trim().escape(),
+  body('state').optional({ checkFalsy: true }).trim().escape(),
+  body('deliveryAddress').optional({ checkFalsy: true }).trim().escape(),
+  body('deliveryArea').optional({ checkFalsy: true }).trim().escape(),
+  body('deliveryLandmark').optional({ checkFalsy: true }).trim().escape(),
+  body('deliveryInstructions').optional({ checkFalsy: true }).trim().escape(),
+  body('recipientName').optional({ checkFalsy: true }).trim().escape(),
+  body('recipientPhone').optional({ checkFalsy: true }).matches(/^[0-9+\-\s()]{7,30}$/).withMessage('Invalid recipient phone number'),
+  body('deliveryMethod').optional({ checkFalsy: true }).isIn(['delivery', 'farm_collection']).withMessage('Invalid delivery method'),
+  body('collectionPreference').optional({ checkFalsy: true }).trim().escape(),
+  body('paymentMethod').optional({ checkFalsy: true }).trim().escape(),
+  body('deliveryZoneId').optional({ checkFalsy: true }).isInt({ min: 1 }).withMessage('Invalid delivery zone'),
+  body('preferredDeliveryDate').optional({ checkFalsy: true }).isISO8601().withMessage('Invalid delivery date'),
+  body('preferredTimeWindow').optional({ checkFalsy: true }).trim().escape(),
+  body('customerNotes').optional({ checkFalsy: true }).trim().escape(),
   body('cartItems').isArray({ min: 1 }).withMessage('Cart must have at least one item')
 ];
 
@@ -20,11 +32,11 @@ const validateProduct = [
 
 const validateWholesale = [
   body('customerName').trim().notEmpty().withMessage('Name is required').escape(),
-  body('customerPhone').trim().notEmpty().withMessage('Phone is required'),
-  body('businessName').optional().trim().escape(),
-  body('productsRequired').optional().trim().escape(),
-  body('estimatedQuantity').optional().trim().escape(),
-  body('notes').optional().trim().escape()
+  body('customerPhone').trim().notEmpty().withMessage('Phone is required').matches(/^[0-9+\-\s()]{7,30}$/).withMessage('Invalid phone number'),
+  body('businessName').optional({ checkFalsy: true }).trim().escape(),
+  body('productsRequired').optional({ checkFalsy: true }).trim().escape(),
+  body('estimatedQuantity').optional({ checkFalsy: true }).trim().escape(),
+  body('notes').optional({ checkFalsy: true }).trim().escape()
 ];
 
 const handleValidationErrors = (req, res, next) => {

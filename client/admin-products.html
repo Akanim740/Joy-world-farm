@@ -21,6 +21,7 @@
       <a href="/admin/dashboard">Dashboard</a>
       <a href="/admin/products" class="active">Products</a>
       <a href="/admin/orders">Orders</a>
+      <a href="/admin/delivery">Delivery</a>
       <a href="/admin/enquiries">Enquiries</a>
       <a href="/" target="_blank">View Site</a>
       <button onclick="logout()">Logout</button>
@@ -97,6 +98,16 @@
             <input type="number" id="pMinOrder" class="form-control" required min="1" value="1">
           </div>
         </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="pUnitOfSale">Unit of Sale</label>
+            <input type="text" id="pUnitOfSale" class="form-control" maxlength="100" placeholder="e.g. per chick, per crate of 100">
+          </div>
+          <div class="form-group">
+            <label for="pVariants">Variants / Options</label>
+            <input type="text" id="pVariants" class="form-control" maxlength="300" placeholder="e.g. Broiler, Layer, Noiler">
+          </div>
+        </div>
         <div class="form-group">
           <label for="pDescription">Description</label>
           <textarea id="pDescription" class="form-control" rows="3" maxlength="1000"></textarea>
@@ -107,6 +118,8 @@
         </div>
         <div class="form-group">
           <label class="radio-label"><input type="checkbox" id="pActive" checked> Active (visible on site)</label>
+          <label class="radio-label"><input type="checkbox" id="pDeliveryEligible" checked> Available for delivery (uncheck for farm-collection only)</label>
+          <label class="radio-label"><input type="checkbox" id="pFeatured"> Featured on homepage</label>
         </div>
         <div id="productFormMsg" class="alert" hidden></div>
         <div style="display:flex; gap:10px;">
