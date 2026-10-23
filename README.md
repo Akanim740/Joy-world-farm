@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Joy World Farm
 
 A professional, responsive e-commerce website for **Joy World Farm** — a poultry and catfish
@@ -246,3 +247,7 @@ The site does **not** claim an order is paid until payment is verified, does not
 company history, certifications, reviews, or capacity, and does not charge delivery fees
 unless configured and disclosed. Contact details, the WhatsApp number, and product data are
 all owner-configurable.
+=======
+# Joy-world-farm
+**Joy World Farm** - A professional e-commerce website for a poultry and catfish farm based in Port Harcourt, Rivers State, Nigeria. Features online ordering, WhatsApp integration, wholesale enquiries, and an admin dashboard. Built with Node.js, Express, and SQLite.
+>>>>>>> e4b963e254fc60b10ac004032240e9329ef17a2b
