@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/svg+xml" href="/images/favicon.svg">
+  <link rel="apple-touch-icon" href="/images/favicon.svg">
+  <title>Search - Joy World Farm</title>
+  <meta name="description" content="Search for chicks, turkeys, and catfish products at Joy World Farm in Port Harcourt.">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/category.css">
+  <link rel="stylesheet" href="/css/animations.css">
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  <header>
+    <nav class="nav" aria-label="Main navigation">
+      <a class="logo" href="/">
+        <span class="logo-icon" aria-hidden="true">🌱</span>
+        <span>Joy World Farm</span>
+      </a>
+      <button class="mobile-menu" id="mobileMenuBtn" aria-label="Toggle menu" aria-expanded="false">☰</button>
+      <div class="nav-links" id="navLinks">
+        <a class="nav-link" href="/">Home</a>
+        <a class="nav-link" href="/chicks">Chicks</a>
+        <a class="nav-link" href="/turkeys">Turkeys</a>
+        <a class="nav-link" href="/catfish">Catfish</a>
+        <a class="nav-link" href="/wholesale">Wholesale</a>
+        <a class="nav-link" href="/about">About</a>
+        <a class="nav-link" href="/contact">Contact</a>
+        <a class="nav-link" href="/cart">Cart <span class="cart-badge" id="cartBadge">0</span></a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main-content">
+    <section class="page-hero">
+      <div class="container">
+        <h1>Search Products</h1>
+        <p>Find chicks, turkeys, and catfish across our entire catalogue.</p>
+      </div>
+    </section>
+
+    <section class="category-filters">
+      <div class="container">
+        <div class="search-bar" style="max-width:100%;">
+          <input type="search" id="searchInput" class="form-control" placeholder="Type to search..." aria-label="Search products" autofocus>
+        </div>
+      </div>
+    </section>
+
+    <section class="product-listing">
+      <div class="container">
+        <div id="productGrid" class="card-grid" aria-live="polite">
+          <div class="empty-state" style="grid-column:1/-1;">
+            <div class="empty-icon">🔍</div>
+            <h3>Start typing to search</h3>
+            <p>Search by product name, breed, or description.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>Joy World Farm</h3>
+        <p>Quality chicks, turkeys, and catfish in Port Harcourt, Rivers State, Nigeria.</p>
+      </div>
+      <div class="footer-section">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/chicks">Chicks</a></li>
+          <li><a href="/turkeys">Turkeys</a></li>
+          <li><a href="/catfish">Catfish</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h3>Company</h3>
+        <ul>
+          <li><a href="/about">About Us</a></li>
+          <li><a href="/contact">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; <span id="year"></span> Joy World Farm. Port Harcourt, Rivers State, Nigeria.</p>
+    </div>
+  </footer>
+
+  <div id="toast" class="toast" role="alert" aria-live="assertive"></div>
+
+  <script src="/js/utils.js"></script>
+  <script src="/js/site.js"></script>
+  <script>
+    function showToast(m) {
+      const t = document.getElementById('toast');
+      t.textContent = m; t.classList.add('show');
+      setTimeout(() => t.classList.remove('show'), 3000);
+    }
+
+    async function searchProducts() {
+      const q = document.getElementById('searchInput').value.trim().toLowerCase();
+      const grid = document.getElementById('productGrid');
+      if (q.length < 2) {
+        grid.innerHTML = '<div class="empty-state" style="grid-column:1/-1;"><div class="empty-icon">🔍</div><h3>Start typing to search</h3><p>Search by product name, breed, or description.</p></div>';
+        return;
+      }
+      try {
+        const res = await fetch('/api/products');
+        const data = await res.json();
+        const results = (data.products || []).filter(p =>
+          p.name.toLowerCase().includes(q) ||
+          (p.breed && p.breed.toLowerCase().includes(q)) ||
+          (p.description && p.description.toLowerCase().includes(q)) ||
+          (p.category && p.category.toLowerCase().includes(q))
+        );
+        if (results.length === 0) {
+          grid.innerHTML = '<div class="empty-state" style="grid-column:1/-1;"><div class="empty-icon">🔍</div><h3>No results</h3><p>Try different keywords.</p></div>';
+          return;
+        }
+        grid.innerHTML = results.map(p => `
+          <div class="product-card">
+            ${p.is_demo ? '<div class="demo-notice">Demonstration listing — pricing and stock unconfirmed</div>' : ''}
+            <div class="product-image">
+              <img src="${p.image_url || '/images/placeholder.svg'}" alt="${p.name}" loading="lazy">
+              <div class="product-badge">${p.category}</div>
+            </div>
+            <div class="product-info">
+              <div class="product-name">${p.name}</div>
+              <div class="product-meta">${[p.breed, p.age, p.size].filter(Boolean).join(' · ')}</div>
+              <div class="product-price">₦${p.price.toLocaleString()}</div>
+              <div class="card-actions">
+                <button class="btn btn-primary btn-full" onclick="addToCart('${p.product_id}', ${p.min_order_quantity}); showToast('Added to cart!')">Add to Cart</button>
+                <a href="/product?id=${p.product_id}" class="btn btn-outline btn-full">View Details</a>
+              </div>
+            </div>
+          </div>`).join('');
+      } catch (err) {
+        grid.innerHTML = '<div class="empty-state" style="grid-column:1/-1;"><div class="empty-icon">⚠️</div><h3>Search failed</h3><p>Please try again.</p></div>';
+      }
+    }
+
+    document.getElementById('searchInput').addEventListener('input', searchProducts);
+  </script>
+</body>
+</html>

@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300" viewBox="0 0 400 300" role="img" aria-label="Joy World Farm product placeholder">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0f7c4f"/>
+      <stop offset="1" stop-color="#0a5d38"/>
+    </linearGradient>
+  </defs>
+  <rect width="400" height="300" fill="url(#g)"/>
+  <circle cx="200" cy="130" r="60" fill="rgba(255,255,255,0.12)"/>
+  <text x="200" y="150" font-family="sans-serif" font-size="60" text-anchor="middle" fill="#f2d16b">&#127793;</text>
+  <text x="200" y="220" font-family="sans-serif" font-size="20" font-weight="bold" text-anchor="middle" fill="#ffffff">Joy World Farm</text>
+  <text x="200" y="248" font-family="sans-serif" font-size="13" text-anchor="middle" fill="rgba(255,255,255,0.7)">Product image placeholder</text>
+</svg>

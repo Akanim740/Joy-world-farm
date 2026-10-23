@@ -1,0 +1,40 @@
+﻿{
+  "name": "joy-world-farm",
+  "version": "1.0.0",
+  "description": "Joy World Farm - Poultry and Catfish E-commerce Website (Port Harcourt, Rivers State, Nigeria)",
+  "main": "server/index.js",
+  "scripts": {
+    "start": "node server/index.js",
+    "dev": "nodemon server/index.js",
+    "test": "node server/test.js",
+    "seed:clear": "node server/scripts/clearDemoData.js"
+  },
+  "keywords": [
+    "poultry",
+    "catfish",
+    "ecommerce",
+    "port-harcourt",
+    "nigeria"
+  ],
+  "author": "Joy World Farm",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "bcryptjs": "^3.0.3",
+    "better-sqlite3": "^13.0.3",
+    "compression": "^1.8.2",
+    "cors": "^2.8.6",
+    "dotenv": "^18.0.8",
+    "express": "^5.3.0",
+    "express-session": "^1.19.0",
+    "express-validator": "^7.3.2",
+    "helmet": "^8.3.0",
+    "memorystore": "^1.6.8",
+    "morgan": "^1.12.1",
+    "multer": "^2.4.0",
+    "uuid": "^14.0.3"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
+  }
+}

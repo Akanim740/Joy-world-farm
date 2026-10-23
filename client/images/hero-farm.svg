@@ -1,0 +1,101 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" role="img" aria-label="Illustration of Joy World Farm: green fields, a barn, trees and a sunrise">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#dff3e6"/>
+      <stop offset="0.55" stop-color="#f4faf6"/>
+      <stop offset="1" stop-color="#eaf6ee"/>
+    </linearGradient>
+    <radialGradient id="sun" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#ffe9a8"/>
+      <stop offset="0.55" stop-color="#f2d16b"/>
+      <stop offset="1" stop-color="#f2d16b" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="hillBack" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#159a63"/>
+      <stop offset="1" stop-color="#0f7c4f"/>
+    </linearGradient>
+    <linearGradient id="hillMid" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0f7c4f"/>
+      <stop offset="1" stop-color="#0a5d38"/>
+    </linearGradient>
+    <linearGradient id="hillFront" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0a5d38"/>
+      <stop offset="1" stop-color="#063d26"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="800" fill="url(#sky)"/>
+  <circle cx="900" cy="210" r="170" fill="url(#sun)"/>
+  <circle cx="900" cy="210" r="70" fill="#ffe9a8"/>
+
+  <!-- clouds -->
+  <g fill="#ffffff" opacity="0.85">
+    <ellipse cx="270" cy="160" rx="80" ry="30"/>
+    <ellipse cx="330" cy="145" rx="60" ry="26"/>
+    <ellipse cx="720" cy="120" rx="70" ry="24"/>
+    <ellipse cx="770" cy="108" rx="48" ry="20"/>
+  </g>
+
+  <!-- rolling hills -->
+  <path d="M0 470 C 200 400 340 470 520 470 C 720 470 900 400 1200 460 L1200 800 L0 800 Z" fill="url(#hillBack)"/>
+  <path d="M0 560 C 220 500 400 580 640 560 C 860 542 1000 590 1200 560 L1200 800 L0 800 Z" fill="url(#hillMid)"/>
+  <path d="M0 660 C 260 620 460 690 700 670 C 920 652 1040 690 1200 670 L1200 800 L0 800 Z" fill="url(#hillFront)"/>
+
+  <!-- field furrows -->
+  <g stroke="#0f7c4f" stroke-opacity="0.35" stroke-width="3" fill="none">
+    <path d="M60 740 C 300 700 520 760 760 730"/>
+    <path d="M60 780 C 320 745 540 800 800 770"/>
+  </g>
+
+  <!-- barn -->
+  <g transform="translate(150 380)">
+    <rect x="0" y="90" width="240" height="150" fill="#b8862b"/>
+    <rect x="0" y="90" width="240" height="150" fill="#000" opacity="0.06"/>
+    <polygon points="-20,90 120,-10 260,90" fill="#0a5d38"/>
+    <polygon points="-20,90 120,-10 260,90" fill="#fff" opacity="0.06"/>
+    <rect x="90" y="150" width="60" height="90" fill="#063d26"/>
+    <rect x="30" y="120" width="34" height="34" fill="#f2d16b"/>
+    <rect x="176" y="120" width="34" height="34" fill="#f2d16b"/>
+    <path d="M120 -10 L120 90" stroke="#063d26" stroke-width="0" />
+  </g>
+
+  <!-- trees -->
+  <g>
+    <rect x="470" y="470" width="16" height="90" fill="#5a3d20"/>
+    <circle cx="478" cy="440" r="70" fill="#0f7c4f"/>
+    <circle cx="440" cy="470" r="48" fill="#159a63"/>
+    <circle cx="516" cy="470" r="48" fill="#159a63"/>
+  </g>
+  <g>
+    <rect x="1010" y="490" width="14" height="80" fill="#5a3d20"/>
+    <circle cx="1017" cy="465" r="58" fill="#0f7c4f"/>
+    <circle cx="985" cy="490" r="40" fill="#159a63"/>
+    <circle cx="1049" cy="490" r="40" fill="#159a63"/>
+  </g>
+
+  <!-- fence -->
+  <g stroke="#8a6a3a" stroke-width="8" stroke-linecap="round">
+    <line x1="0" y1="600" x2="1200" y2="600" opacity="0.5"/>
+    <line x1="0" y1="630" x2="1200" y2="630" opacity="0.5"/>
+    <g opacity="0.6">
+      <line x1="120" y1="570" x2="120" y2="650"/>
+      <line x1="260" y1="570" x2="260" y2="650"/>
+      <line x1="400" y1="570" x2="400" y2="650"/>
+      <line x1="540" y1="570" x2="540" y2="650"/>
+      <line x1="680" y1="570" x2="680" y2="650"/>
+      <line x1="820" y1="570" x2="820" y2="650"/>
+      <line x1="960" y1="570" x2="960" y2="650"/>
+      <line x1="1100" y1="570" x2="1100" y2="650"/>
+    </g>
+  </g>
+
+  <!-- chickens on the hill -->
+  <g fill="#ffffff">
+    <ellipse cx="640" cy="712" rx="22" ry="16"/>
+    <circle cx="662" cy="700" r="9"/>
+    <path d="M662 691 l8 -8 l-1 9 z" fill="#d4a03a"/>
+    <ellipse cx="740" cy="736" rx="20" ry="14"/>
+    <circle cx="759" cy="726" r="8"/>
+    <path d="M759 718 l7 -7 l-1 8 z" fill="#d4a03a"/>
+  </g>
+</svg>

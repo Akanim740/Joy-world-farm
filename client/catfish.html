@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/svg+xml" href="/images/favicon.svg">
+  <link rel="apple-touch-icon" href="/images/favicon.svg">
+  <title>Catfish for Sale in Port Harcourt - Joy World Farm</title>
+  <meta name="description" content="Order catfish fingerlings, juveniles, and table-size catfish in Port Harcourt. Catfish catalogue from Joy World Farm, Rivers State, Nigeria.">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/category.css">
+  <link rel="stylesheet" href="/css/animations.css">
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  <header>
+    <nav class="nav" aria-label="Main navigation">
+      <a class="logo" href="/">
+        <span class="logo-icon" aria-hidden="true">🌱</span>
+        <span>Joy World Farm</span>
+      </a>
+      <button class="mobile-menu" id="mobileMenuBtn" aria-label="Toggle menu" aria-expanded="false">☰</button>
+      <div class="nav-links" id="navLinks">
+        <a class="nav-link" href="/">Home</a>
+        <a class="nav-link" href="/chicks">Chicks</a>
+        <a class="nav-link" href="/turkeys">Turkeys</a>
+        <a class="nav-link active" href="/catfish">Catfish</a>
+        <a class="nav-link" href="/wholesale">Wholesale</a>
+        <a class="nav-link" href="/about">About</a>
+        <a class="nav-link" href="/contact">Contact</a>
+        <a class="nav-link" href="/cart">Cart <span class="cart-badge" id="cartBadge">0</span></a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main-content">
+    <section class="page-hero">
+      <div class="container page-hero-inner">
+        <div class="page-hero-text">
+          <h1>Catfish</h1>
+          <p>Catfish products from Joy World Farm in Port Harcourt. Contact us to confirm current sizes, pricing, and availability.</p>
+        </div>
+        <img class="page-hero-art" src="/images/catfish.svg" alt="Illustration of a catfish swimming in water" width="400" height="300">
+      </div>
+    </section>
+
+    <section class="category-filters">
+      <div class="container">
+        <div class="filter-bar" role="tablist" aria-label="Catfish categories">
+          <button class="filter-btn active" data-filter="all" role="tab" aria-selected="true">All Catfish</button>
+          <button class="filter-btn" data-filter="fingerlings" role="tab" aria-selected="false">Fingerlings</button>
+          <button class="filter-btn" data-filter="juveniles" role="tab" aria-selected="false">Juveniles</button>
+          <button class="filter-btn" data-filter="table-size" role="tab" aria-selected="false">Table Size</button>
+        </div>
+        <div class="search-bar">
+          <input type="search" id="searchInput" class="form-control" placeholder="Search catfish..." aria-label="Search catfish">
+        </div>
+      </div>
+    </section>
+
+    <section class="product-listing">
+      <div class="container">
+        <div id="productGrid" class="card-grid" aria-live="polite">
+          <div class="loading-skeleton" style="grid-column: 1/-1;"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>Joy World Farm</h3>
+        <p>Quality chicks, turkeys, and catfish in Port Harcourt, Rivers State, Nigeria.</p>
+      </div>
+      <div class="footer-section">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/chicks">Chicks</a></li>
+          <li><a href="/turkeys">Turkeys</a></li>
+          <li><a href="/catfish">Catfish</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h3>Company</h3>
+        <ul>
+          <li><a href="/about">About Us</a></li>
+          <li><a href="/contact">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; <span id="year"></span> Joy World Farm. Port Harcourt, Rivers State, Nigeria.</p>
+    </div>
+  </footer>
+
+  <div id="toast" class="toast" role="alert" aria-live="assertive"></div>
+
+  <script src="/js/utils.js"></script>
+  <script src="/js/site.js"></script>
+  <script src="/js/category.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => { loadCategory('catfish'); });
+  </script>
+</body>
+</html>

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/svg+xml" href="/images/favicon.svg">
+  <link rel="apple-touch-icon" href="/images/favicon.svg">
+  <title>Admin Login - Joy World Farm</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/admin.css">
+  <link rel="stylesheet" href="/css/animations.css">
+</head>
+<body class="admin-login-body">
+  <main class="admin-login-wrap">
+    <form class="admin-login-card" id="loginForm">
+      <div class="logo" style="justify-content:center; margin-bottom:25px;">
+        <span class="logo-icon" aria-hidden="true">🌱</span>
+        <span>Joy World Farm Admin</span>
+      </div>
+      <div id="loginError" class="alert alert-danger" hidden></div>
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input type="text" id="username" class="form-control" required autocomplete="username">
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" class="form-control" required autocomplete="current-password">
+      </div>
+      <button type="submit" class="btn btn-primary btn-full" id="loginBtn">Sign In</button>
+      <div style="margin-top:18px; border-top:1px solid var(--border); padding-top:16px;">
+        <button type="button" class="btn btn-outline btn-full" id="nanoLoginBtn">Authenticate with Nanotech</button>
+        <p style="text-align:center; color:var(--muted); font-size:.85rem; margin-top:8px;" id="nanoStatus">Checking nanotech auth…</p>
+      </div>
+      <p style="text-align:center; margin-top:15px;"><a href="/" style="color:var(--primary);">← Back to website</a></p>
+    </form>
+  </main>
+
+  <script>
+    document.getElementById('loginForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const btn = document.getElementById('loginBtn');
+      const errBox = document.getElementById('loginError');
+      errBox.hidden = true;
+      btn.disabled = true;
+      btn.textContent = 'Signing in...';
+
+      try {
+        const res = await fetch('/api/admin/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            username: document.getElementById('username').value.trim(),
+            password: document.getElementById('password').value
+          })
+        });
+        const data = await res.json();
+        if (data.success) {
+          window.location.href = '/admin/dashboard';
+        } else {
+          errBox.hidden = false;
+          errBox.textContent = data.message || 'Invalid credentials';
+          btn.disabled = false;
+          btn.textContent = 'Sign In';
+        }
+      } catch (err) {
+        errBox.hidden = false;
+        errBox.textContent = 'Network error. Please try again.';
+        btn.disabled = false;
+        btn.textContent = 'Sign In';
+      }
+    });
+
+    (async function initNano() {
+      const statusEl = document.getElementById('nanoStatus');
+      const btn = document.getElementById('nanoLoginBtn');
+      if (!statusEl || !btn) return;
+      try {
+        const res = await fetch('/api/config');
+        const cfg = await res.json();
+        if (!cfg.nanoAuthEnabled) {
+          statusEl.textContent = 'Nanotech authentication disabled';
+          btn.disabled = true;
+          return;
+        }
+        statusEl.textContent = 'Nanotech authentication enabled';
+        btn.addEventListener('click', async () => {
+          btn.disabled = true;
+          btn.textContent = 'Requesting challenge…';
+          try {
+            const c = await fetch('/api/auth/nano/challenge', { method: 'POST' });
+            const cd = await c.json();
+            if (!cd.success) throw new Error(cd.message || 'Challenge failed');
+            const v = await fetch('/api/auth/nano/verify', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json', 'x-nano-token': cd.challenge },
+              body: JSON.stringify({ nanoToken: cd.challenge })
+            });
+            const vd = await v.json();
+            if (vd.success) {
+              window.location.href = '/admin/dashboard';
+              return;
+            }
+            throw new Error(vd.message || 'Verification failed');
+          } catch (err) {
+            statusEl.textContent = err.message || 'Nanotech auth failed';
+            btn.disabled = false;
+            btn.textContent = 'Authenticate with Nanotech';
+          }
+        });
+      } catch (e) {
+        statusEl.textContent = 'Nanotech status unavailable';
+      }
+    })();
+  </script>
+</body>
+</html>

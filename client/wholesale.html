@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/svg+xml" href="/images/favicon.svg">
+  <link rel="apple-touch-icon" href="/images/favicon.svg">
+  <title>Wholesale Enquiries - Joy World Farm | Port Harcourt</title>
+  <meta name="description" content="Send a wholesale enquiry for bulk chicks, turkeys, and catfish. Joy World Farm supplies poultry farmers, retailers, and distributors in Port Harcourt and Rivers State.">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/static.css">
+  <link rel="stylesheet" href="/css/animations.css">
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  <header>
+    <nav class="nav" aria-label="Main navigation">
+      <a class="logo" href="/">
+        <span class="logo-icon" aria-hidden="true">🌱</span>
+        <span>Joy World Farm</span>
+      </a>
+      <button class="mobile-menu" id="mobileMenuBtn" aria-label="Toggle menu" aria-expanded="false">☰</button>
+      <div class="nav-links" id="navLinks">
+        <a class="nav-link" href="/">Home</a>
+        <a class="nav-link" href="/chicks">Chicks</a>
+        <a class="nav-link" href="/turkeys">Turkeys</a>
+        <a class="nav-link" href="/catfish">Catfish</a>
+        <a class="nav-link active" href="/wholesale">Wholesale</a>
+        <a class="nav-link" href="/about">About</a>
+        <a class="nav-link" href="/contact">Contact</a>
+        <a class="nav-link" href="/cart">Cart <span class="cart-badge" id="cartBadge">0</span></a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main-content">
+    <section class="page-hero-simple">
+      <div class="container">
+        <h1>Wholesale Enquiries</h1>
+        <p style="opacity:0.9; margin-top:8px;">Bulk buyers, poultry farmers, retailers, and distributors welcome.</p>
+      </div>
+    </section>
+
+    <section class="static-content">
+      <div class="container">
+        <div class="contact-form-wrap">
+          <div class="contact-info-card">
+            <h3>Bulk Supply</h3>
+            <p>Whether you run a poultry farm, supply retailers, or need regular stock for your business, we would like to hear from you.</p>
+            <p>Fill in the form with your requirements and we will get back to you as soon as possible.</p>
+            <a href="#" id="waEnquiryBtn" class="btn btn-whatsapp btn-full" target="_blank" rel="noopener" style="margin-top:15px;" hidden>Send Enquiry on WhatsApp</a>
+          </div>
+
+          <form class="contact-form" id="wholesaleForm">
+            <h2>Wholesale Enquiry Form</h2>
+            <div id="formMsg" class="alert alert-success" hidden></div>
+
+            <div class="form-group">
+              <label for="whName">Full Name *</label>
+              <input type="text" id="whName" class="form-control" required maxlength="100">
+              <span class="field-error" id="err-whName"></span>
+            </div>
+            <div class="form-group">
+              <label for="whPhone">Phone Number *</label>
+              <input type="tel" id="whPhone" class="form-control" required maxlength="20" placeholder="e.g. 08031234567">
+              <span class="field-error" id="err-whPhone"></span>
+            </div>
+            <div class="form-group">
+              <label for="whBusiness">Business Name (optional)</label>
+              <input type="text" id="whBusiness" class="form-control" maxlength="150">
+            </div>
+            <div class="form-group">
+              <label for="whProducts">Products Required</label>
+              <textarea id="whProducts" class="form-control" rows="2" maxlength="500" placeholder="e.g. Broiler chicks, catfish fingerlings"></textarea>
+            </div>
+            <div class="form-group">
+              <label for="whQty">Estimated Quantity</label>
+              <input type="text" id="whQty" class="form-control" maxlength="200" placeholder="e.g. 500 broiler chicks per month">
+            </div>
+            <div class="form-group">
+              <label for="whNotes">Additional Notes</label>
+              <textarea id="whNotes" class="form-control" rows="3" maxlength="500"></textarea>
+            </div>
+            <div id="whErrors" class="alert alert-danger" hidden></div>
+            <button type="submit" class="btn btn-primary btn-full" id="whSubmitBtn">Submit Enquiry</button>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>Joy World Farm</h3>
+        <p>Quality chicks, turkeys, and catfish in Port Harcourt, Rivers State, Nigeria.</p>
+      </div>
+      <div class="footer-section">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/chicks">Chicks</a></li>
+          <li><a href="/turkeys">Turkeys</a></li>
+          <li><a href="/catfish">Catfish</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h3>Company</h3>
+        <ul>
+          <li><a href="/about">About Us</a></li>
+          <li><a href="/contact">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; <span id="year"></span> Joy World Farm. Port Harcourt, Rivers State, Nigeria.</p>
+    </div>
+  </footer>
+
+  <script src="/js/utils.js"></script>
+  <script src="/js/site.js"></script>
+  <script src="/js/wholesale.js"></script>
+</body>
+</html>

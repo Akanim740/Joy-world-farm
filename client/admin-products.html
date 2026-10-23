@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/svg+xml" href="/images/favicon.svg">
+  <link rel="apple-touch-icon" href="/images/favicon.svg">
+  <title>Manage Products - Joy World Farm Admin</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/admin.css">
+  <link rel="stylesheet" href="/css/animations.css">
+</head>
+<body class="admin-body">
+  <header class="admin-topbar">
+    <a class="logo" href="/admin/dashboard">
+      <span class="logo-icon" aria-hidden="true">🌱</span>
+      <span>Joy World Farm Admin</span>
+    </a>
+    <nav class="admin-nav" aria-label="Admin navigation">
+      <a href="/admin/dashboard">Dashboard</a>
+      <a href="/admin/products" class="active">Products</a>
+      <a href="/admin/orders">Orders</a>
+      <a href="/admin/enquiries">Enquiries</a>
+      <a href="/" target="_blank">View Site</a>
+      <button onclick="logout()">Logout</button>
+    </nav>
+  </header>
+
+  <main class="admin-content">
+    <h1>Product Management</h1>
+
+    <div class="admin-form-card">
+      <h2 id="formTitle">Add New Product</h2>
+      <form id="productForm" novalidate>
+        <input type="hidden" id="productId">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="pName">Product Name *</label>
+            <input type="text" id="pName" class="form-control" required maxlength="200">
+          </div>
+          <div class="form-group">
+            <label for="pCategory">Category *</label>
+            <select id="pCategory" class="form-control" required>
+              <option value="chicks">Chicks</option>
+              <option value="turkeys">Turkeys</option>
+              <option value="catfish">Catfish</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="pSubcategory">Subcategory</label>
+            <select id="pSubcategory" class="form-control">
+              <option value="">Select…</option>
+              <option value="day-old">Day-old</option>
+              <option value="three-week">Three-week-old</option>
+              <option value="grow-out">Grow-out</option>
+              <option value="two-week">Two-week-old</option>
+              <option value="fingerlings">Fingerlings</option>
+              <option value="juveniles">Juveniles</option>
+              <option value="table-size">Table size</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="pBreed">Breed</label>
+            <input type="text" id="pBreed" class="form-control" maxlength="100" placeholder="e.g. Broilers, Layers, Noilers">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="pAge">Age</label>
+            <input type="text" id="pAge" class="form-control" maxlength="100" placeholder="e.g. Day old, 3 weeks">
+          </div>
+          <div class="form-group">
+            <label for="pSize">Size (catfish)</label>
+            <input type="text" id="pSize" class="form-control" maxlength="100" placeholder="e.g. Fingerlings (3-5cm)">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="pUnit">Quantity Unit (catfish)</label>
+            <input type="text" id="pUnit" class="form-control" maxlength="100" placeholder="e.g. per 100, per kg">
+          </div>
+          <div class="form-group">
+            <label for="pPrice">Price (₦) *</label>
+            <input type="number" id="pPrice" class="form-control" required min="0" step="0.01">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="pQuantity">Available Quantity *</label>
+            <input type="number" id="pQuantity" class="form-control" required min="0">
+          </div>
+          <div class="form-group">
+            <label for="pMinOrder">Minimum Order *</label>
+            <input type="number" id="pMinOrder" class="form-control" required min="1" value="1">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="pDescription">Description</label>
+          <textarea id="pDescription" class="form-control" rows="3" maxlength="1000"></textarea>
+        </div>
+        <div class="form-group">
+          <label for="pImage">Product Image</label>
+          <input type="file" id="pImage" class="form-control" accept="image/*">
+        </div>
+        <div class="form-group">
+          <label class="radio-label"><input type="checkbox" id="pActive" checked> Active (visible on site)</label>
+        </div>
+        <div id="productFormMsg" class="alert" hidden></div>
+        <div style="display:flex; gap:10px;">
+          <button type="submit" class="btn btn-primary" id="productSubmitBtn">Save Product</button>
+          <button type="button" class="btn btn-outline" onclick="resetProductForm()">Cancel Edit</button>
+        </div>
+      </form>
+    </div>
+
+    <h2 style="color:var(--primary); margin-bottom:15px;">All Products</h2>
+    <div class="admin-table-wrap">
+      <table class="admin-table">
+        <thead>
+          <tr><th>Name</th><th>Category</th><th>Price</th><th>Stock</th><th>Status</th><th>Actions</th></tr>
+        </thead>
+        <tbody id="productsBody">
+          <tr><td colspan="6">Loading…</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </main>
+
+  <div id="toast" class="toast" role="alert" aria-live="assertive"></div>
+
+  <script src="/js/utils.js"></script>
+  <script src="/js/admin.js"></script>
+  <script>
+    initAdmin('products');
+  </script>
+</body>
+</html>

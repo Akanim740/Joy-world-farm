@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/svg+xml" href="/images/favicon.svg">
+  <link rel="apple-touch-icon" href="/images/favicon.svg">
+  <title>Contact Us - Joy World Farm | Port Harcourt</title>
+  <meta name="description" content="Contact Joy World Farm in Port Harcourt, Rivers State, Nigeria. Enquire about chicks, turkeys, catfish, and wholesale orders.">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/static.css">
+  <link rel="stylesheet" href="/css/animations.css">
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  <header>
+    <nav class="nav" aria-label="Main navigation">
+      <a class="logo" href="/">
+        <span class="logo-icon" aria-hidden="true">🌱</span>
+        <span>Joy World Farm</span>
+      </a>
+      <button class="mobile-menu" id="mobileMenuBtn" aria-label="Toggle menu" aria-expanded="false">☰</button>
+      <div class="nav-links" id="navLinks">
+        <a class="nav-link" href="/">Home</a>
+        <a class="nav-link" href="/chicks">Chicks</a>
+        <a class="nav-link" href="/turkeys">Turkeys</a>
+        <a class="nav-link" href="/catfish">Catfish</a>
+        <a class="nav-link" href="/wholesale">Wholesale</a>
+        <a class="nav-link" href="/about">About</a>
+        <a class="nav-link active" href="/contact">Contact</a>
+        <a class="nav-link" href="/cart">Cart <span class="cart-badge" id="cartBadge">0</span></a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main-content">
+    <section class="page-hero-simple">
+      <div class="container">
+        <h1>Contact Us</h1>
+      </div>
+    </section>
+
+    <section class="static-content">
+      <div class="container">
+        <div class="contact-form-wrap">
+          <div class="contact-info-card">
+            <h3>Our Details</h3>
+            <p>📍 <strong>Location:</strong> Port Harcourt, Rivers State, Nigeria</p>
+            <p>📞 <strong>Phone / WhatsApp:</strong> <span id="contactPhone">Coming soon</span></p>
+            <p>📧 <strong>Email:</strong> <span id="contactEmail">Coming soon</span></p>
+            <p>🕐 <strong>Business Hours:</strong> Monday – Saturday, 8am – 5pm (West Africa Time)</p>
+            <a href="#" id="contactWaBtn" class="btn btn-whatsapp btn-full" target="_blank" rel="noopener" style="margin-top:15px;" hidden>Chat on WhatsApp</a>
+          </div>
+
+          <form class="contact-form" id="contactForm">
+            <h2>Send a Message</h2>
+            <div class="form-group">
+              <label for="msgName">Your Name *</label>
+              <input type="text" id="msgName" class="form-control" required maxlength="100">
+            </div>
+            <div class="form-group">
+              <label for="msgPhone">Phone Number *</label>
+              <input type="tel" id="msgPhone" class="form-control" required maxlength="20">
+            </div>
+            <div class="form-group">
+              <label for="msgEmail">Email (optional)</label>
+              <input type="email" id="msgEmail" class="form-control" maxlength="100">
+            </div>
+            <div class="form-group">
+              <label for="msgBody">Message *</label>
+              <textarea id="msgBody" class="form-control" rows="5" required maxlength="1000"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary btn-full">Send Enquiry</button>
+            <p class="checkout-note" style="margin-top:10px;">For the fastest response, use WhatsApp to contact us directly.</p>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>Joy World Farm</h3>
+        <p>Quality chicks, turkeys, and catfish in Port Harcourt, Rivers State, Nigeria.</p>
+      </div>
+      <div class="footer-section">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/chicks">Chicks</a></li>
+          <li><a href="/turkeys">Turkeys</a></li>
+          <li><a href="/catfish">Catfish</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h3>Company</h3>
+        <ul>
+          <li><a href="/about">About Us</a></li>
+          <li><a href="/contact">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; <span id="year"></span> Joy World Farm. Port Harcourt, Rivers State, Nigeria.</p>
+    </div>
+  </footer>
+
+  <div id="toast" class="toast" role="alert" aria-live="assertive"></div>
+
+  <script src="/js/utils.js"></script>
+  <script src="/js/site.js"></script>
+  <script src="/js/contact.js"></script>
+</body>
+</html>

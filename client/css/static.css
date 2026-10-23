@@ -1,0 +1,75 @@
+.page-hero-simple {
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  color: white;
+  padding: 40px 0;
+}
+
+.page-hero-simple h1 {
+  font-size: 2rem;
+}
+
+.static-content {
+  padding: 50px 0;
+}
+
+.container.narrow {
+  max-width: 800px;
+}
+
+.content-block {
+  margin-bottom: 40px;
+}
+
+.content-block h2 {
+  color: var(--primary);
+  margin-bottom: 15px;
+  font-size: 1.5rem;
+}
+
+.content-block p {
+  color: var(--text-light);
+  line-height: 1.8;
+  margin-bottom: 15px;
+}
+
+.contact-form-wrap {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+}
+
+.contact-info-card {
+  background: var(--bg-light);
+  border: 1px solid var(--border);
+  border-radius: 15px;
+  padding: 30px;
+}
+
+.contact-info-card h3 {
+  color: var(--primary);
+  margin-bottom: 15px;
+}
+
+.contact-info-card p {
+  margin-bottom: 12px;
+  color: var(--text-light);
+}
+
+.contact-form {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 15px;
+  padding: 30px;
+  box-shadow: var(--shadow);
+}
+
+.contact-form h2 {
+  color: var(--primary);
+  margin-bottom: 20px;
+}
+
+@media (max-width: 768px) {
+  .contact-form-wrap {
+    grid-template-columns: 1fr;
+  }
+}

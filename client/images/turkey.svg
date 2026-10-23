@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Illustration of a turkey with a fanned tail">
+  <defs>
+    <linearGradient id="turkeyBg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f4faf6"/>
+      <stop offset="1" stop-color="#eef7f1"/>
+    </linearGradient>
+    <radialGradient id="fan" cx="0.5" cy="0.85" r="0.85">
+      <stop offset="0" stop-color="#d4a03a"/>
+      <stop offset="1" stop-color="#b8862b"/>
+    </radialGradient>
+  </defs>
+  <rect width="400" height="300" fill="url(#turkeyBg)"/>
+  <ellipse cx="200" cy="272" rx="120" ry="15" fill="#0a5d38" opacity="0.12"/>
+
+  <!-- fanned tail feathers -->
+  <g transform="translate(200 160)">
+    <g fill="url(#fan)">
+      <ellipse cx="0" cy="-60" rx="15" ry="60"/>
+      <ellipse cx="0" cy="-60" rx="15" ry="60" transform="rotate(-30)"/>
+      <ellipse cx="0" cy="-60" rx="15" ry="60" transform="rotate(30)"/>
+      <ellipse cx="0" cy="-58" rx="15" ry="58" transform="rotate(-58)"/>
+      <ellipse cx="0" cy="-58" rx="15" ry="58" transform="rotate(58)"/>
+      <ellipse cx="0" cy="-54" rx="14" ry="54" transform="rotate(-84)"/>
+      <ellipse cx="0" cy="-54" rx="14" ry="54" transform="rotate(84)"/>
+    </g>
+    <g fill="#f2d16b">
+      <circle cx="0" cy="-108" r="9"/>
+      <circle cx="54" cy="-96" r="9"/>
+      <circle cx="-54" cy="-96" r="9"/>
+      <circle cx="94" cy="-64" r="8"/>
+      <circle cx="-94" cy="-64" r="8"/>
+    </g>
+  </g>
+
+  <!-- body -->
+  <ellipse cx="200" cy="212" rx="74" ry="58" fill="#4a3421"/>
+  <ellipse cx="200" cy="220" rx="70" ry="50" fill="#5a3d20"/>
+  <!-- wing -->
+  <path d="M150 200 C 165 178 220 178 240 206 C 215 232 172 232 150 200 Z" fill="#3f2c1b"/>
+  <!-- head/neck -->
+  <path d="M186 168 q -6 -34 14 -44 q 20 10 14 44 Z" fill="#7a8b6f"/>
+  <circle cx="200" cy="118" r="26" fill="#8a9b7d"/>
+  <!-- wattle -->
+  <path d="M212 132 q 14 4 12 18 q -10 -2 -16 -8 Z" fill="#d64545"/>
+  <path d="M192 104 q -12 -6 -8 -20 q 10 4 14 14 Z" fill="#d64545"/>
+  <!-- beak -->
+  <path d="M212 118 L 236 126 L 212 136 Z" fill="#f0a04b"/>
+  <!-- eye -->
+  <circle cx="196" cy="112" r="4.5" fill="#1c130a"/>
+  <!-- legs -->
+  <g stroke="#e0a63a" stroke-width="7" stroke-linecap="round">
+    <line x1="182" y1="262" x2="178" y2="282"/>
+    <line x1="218" y1="262" x2="222" y2="282"/>
+  </g>
+</svg>
